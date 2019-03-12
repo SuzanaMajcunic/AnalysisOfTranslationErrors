@@ -1,0 +1,187 @@
+﻿<Page
+    x:Class="AnalysisOfTranslationErrors.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AnalysisOfTranslationErrors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:AnalysisOfTranslationErrors.ViewModels"
+    xmlns:data="using:AnalysisOfTranslationErrors.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
+
+    <Page.DataContext>
+        <vm:HomePageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+
+    <Page.Resources>
+
+        <Style TargetType="TextBlock" x:Name="HomeTextButtonStyle">
+            <!--<Setter Property="FontSize" Value="17" />
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForegroundThemeBrush}" />-->
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Foreground" Value="{ThemeResource TextBoxForegroundHeaderThemeBrush}" />
+            <Setter Property="Margin" Value="20 0 20 0" />
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="TextBlock" x:Name="HomeIconButtonStyle">
+            <Setter Property="FontSize" Value="60" />
+            <Setter Property="Margin" Value="30 10 20 10" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="StackPanel" x:Name="LargePanelStyle">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="150" />
+        </Style>
+    </Page.Resources>
+
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Page welcome title -->
+        <TextBlock Text="Welcome to TREAT (Translation Error Annotation Tool)" HorizontalAlignment="Center"
+                   Margin="0 10 0 10" FontSize="20"
+                   Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}"
+                   Grid.ColumnSpan="2"/>
+
+
+        <!-- Choose new/open project buttons -->
+        <ListBox Grid.Row="1" SelectionMode="Single" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 Height="150" Name="ProjectListBox"
+                  Tapped="ProjectListBox_Tapped">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBoxItem Name="NewProjectListBoxItem">
+                <StackPanel Orientation="Vertical" Style="{StaticResource LargePanelStyle}">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEBC6;"
+                            Style="{StaticResource HomeIconButtonStyle}"/>
+                    <TextBlock Text="New Project"
+                                Style="{StaticResource HomeTextButtonStyle}"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem Name="OpenProjectListBoxItem">
+                <StackPanel Orientation="Vertical" Style="{StaticResource LargePanelStyle}" >
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE773;"
+                            Style="{StaticResource HomeIconButtonStyle}"/>
+                    <TextBlock Text="Open Existing Project"
+                                Style="{StaticResource HomeTextButtonStyle}"/>
+                </StackPanel>
+            </ListBoxItem>
+        </ListBox>
+
+
+        <!-- Display recent projets -->
+        <Border BorderBrush="LightBlue" BorderThickness="1" CornerRadius="3" Margin="10 10 20 20"
+                Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Recent Projects" 
+                           Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}"
+                           FontSize="{ThemeResource TextStyleLargeFontSize}" 
+                           Margin="20 10 10 10"
+                           Grid.Row="0"/>
+
+                <Button Name="ClearRecentProjects" Content="Clear list" 
+                        Grid.Row="0" Margin="160 0 0 0" 
+                        Click="{x:Bind ViewModel.ClearRecentProjectsList}"
+                        Background="{ThemeResource ListBoxItemPointerOverBackgroundThemeBrush}" />
+                <ScrollViewer  VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                    <StackPanel>
+                        <ListView ItemsSource="{x:Bind ViewModel.ProjectsList, Mode=TwoWay}"
+                              IsItemClickEnabled="True"
+                              ItemClick="ListView_ItemClick"
+                              Margin="10">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="data:RecentProject" >
+                                    <TextBlock Text="{x:Bind FileName, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+        </Border>
+
+
+        <!-- Pick files to load a new project - panel -->
+
+
+        <StackPanel Orientation="Vertical"  Grid.Row="2" HorizontalAlignment="Center"  Width="600"
+                        Name="ProjectFilesPanel" Margin="0 30 0 30" Visibility="Collapsed">
+            <Border BorderBrush="LightBlue" BorderThickness="1" CornerRadius="3" >
+                <StackPanel Margin="15">
+                    <TextBlock Text="Choose translation files:" Margin="0 0 0 15" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}"
+                                    FontSize="{ThemeResource TextStyleLargeFontSize}"/>
+                    <RelativePanel Margin="0 0 0 10">
+                        <TextBlock Name="Label0" Text="Name of project:" RelativePanel.AlignLeftWithPanel="True" Margin="0 0 5 0"/>
+                        <TextBox Name="ProjectNameTextBox"
+                                 PlaceholderText="Type new name" RelativePanel.RightOf="Label0"
+                            RelativePanel.AlignRightWithPanel="True"
+                              Margin="0 0 5 0" IsReadOnly="False"/>
+                    </RelativePanel>
+                    <RelativePanel Margin="0 0 0 10">
+                        <TextBlock Name="Label1" Text="Source file:" RelativePanel.AlignLeftWithPanel="True" Margin="0 0 5 0"/>
+                        <TextBox Text="{x:Bind ViewModel.SrcPath, Mode=OneWay}" 
+                                 PlaceholderText="Choose file" RelativePanel.RightOf="Label1"
+                             RelativePanel.LeftOf="SourceFileButton" Margin="0 0 5 0"
+                                 IsReadOnly="True"/>
+                        <Button Name="SourceFileButton" Content="Browse" ToolTipService.ToolTip="Select source file"
+                            RelativePanel.AlignRightWithPanel="True" Click="{x:Bind ViewModel.OpenSrcFile}"/>
+                    </RelativePanel>
+                    <RelativePanel Margin="0 0 0 10">
+                        <TextBlock Name="Label2" Text="System file:" RelativePanel.AlignLeftWithPanel="True" Margin="0 0 5 0"/>
+                        <TextBox Text="{x:Bind ViewModel.SysPath, Mode=OneWay}" 
+                                 PlaceholderText="Choose file" RelativePanel.RightOf="Label2"
+                             RelativePanel.LeftOf="SystemFileButton" Margin="0 0 5 0"
+                                 IsReadOnly="True"/>
+                        <Button Name="SystemFileButton" Content="Browse" ToolTipService.ToolTip="Select system file"
+                            RelativePanel.AlignRightWithPanel="True" Click="{x:Bind ViewModel.OpenSysFile}"/>
+                    </RelativePanel>
+                    <RelativePanel Margin="0 0 0 15">
+                        <TextBlock Name="Label3" Text="Reference file(optional):" RelativePanel.AlignLeftWithPanel="True" Margin="0 0 5 0"/>
+                        <TextBox Text="{x:Bind ViewModel.RefPath, Mode=OneWay}"
+                                 Name="RefTextBox"
+                                 PlaceholderText="Choose file" RelativePanel.RightOf="Label3"
+                             RelativePanel.LeftOf="ReferenceFileButton" Margin="0 0 5 0"
+                                 />
+                        <Button Name="ReferenceFileButton" Content="Browse" ToolTipService.ToolTip="Select reference file"
+                            RelativePanel.AlignRightWithPanel="True" Click="{x:Bind ViewModel.OpenRefFile}"/>
+                    </RelativePanel>
+                    <RelativePanel>
+                        <Button Name="CreateProjectButton" Content="Create Project" 
+                                RelativePanel.LeftOf="CancelNewProjectButton" Margin="0 0 5 0"
+                                Click="{x:Bind CreateProjectAndRefresh}"/>
+                        <Button Name="CancelNewProjectButton" Content="Cancel"  Width="68"  
+                                RelativePanel.AlignRightWithPanel="True"
+                                Click="{x:Bind ViewModel.CancelNewProject}"/>
+                    </RelativePanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+
+    </Grid>
+</Page>

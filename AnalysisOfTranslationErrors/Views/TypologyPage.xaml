@@ -1,0 +1,168 @@
+﻿<Page
+    x:Class="AnalysisOfTranslationErrors.TypologyPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:AnalysisOfTranslationErrors.ViewModels"
+    xmlns:service="using:AnalysisOfTranslationErrors.Services"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
+
+    <Page.DataContext>
+        <vm:TypologyPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Page.Resources>
+
+        <service:StringToBrushConventer x:Key="StringToBrushConventer" />
+
+
+        <DataTemplate x:Key="TreeViewItemDataTemplate">
+            <Grid Height="44" >
+                <TextBlock
+                Text="{Binding Content.Name}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Style="{ThemeResource BodyTextBlockStyle}"
+                    Foreground="{Binding Content.Color, Converter={StaticResource StringToBrushConventer}}"
+                />
+            </Grid>
+        </DataTemplate>
+
+
+        <vm:CardTemplateSelector x:Name="CardTemplateSelector" 
+                                    TreeViewItemDataTemplate="{StaticResource TreeViewItemDataTemplate}">
+        </vm:CardTemplateSelector>
+
+        <Style TargetType="TreeView">
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TreeView">
+                        <TreeViewList x:Name="ListControl"
+                                  ItemTemplateSelector="{StaticResource CardTemplateSelector}"
+                                  ItemContainerStyle="{StaticResource TreeViewItemStyle}"
+                                  CanDragItems="False"
+                                  AllowDrop="False"
+                                  CanReorderItems="False">
+                            <TreeViewList.ItemContainerTransitions>
+                                <TransitionCollection>
+                                    <ContentThemeTransition />
+                                    <ReorderThemeTransition />
+                                    <EntranceThemeTransition IsStaggeringEnabled="False" />
+                                </TransitionCollection>
+                            </TreeViewList.ItemContainerTransitions>
+                        </TreeViewList>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <!--<TextBlock Text="Quality metrics (Typology) Page in progress..." />-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1.1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Please select issue types from MQM Core which you would like to use in annotation process: " 
+                   Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Margin="5 10 10 10"
+                   Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" 
+                           FontSize="16"/>
+
+        <Border BorderBrush="Silver" BorderThickness="1 0 0 0" Grid.Row="0" Grid.Column="1">
+            <TextBlock Text="Adapted MQM Core by user: "  Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" 
+                           FontSize="16"
+                       TextWrapping="Wrap" Margin="20 10 10 10"/>
+        </Border>
+
+        <!-- Core tree view -->
+        <TreeView Grid.Row="1" Grid.Column="0" 
+                  Name="coreTreeView" SelectionMode="Multiple"
+                  />
+        <!-- Button to generate new tree view -->
+        <Button Grid.Row="2" Grid.Column="0" 
+                Content="Select nodes" Name="GenerateTree" 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="5 15 0 0"
+                Click="GenerateTree_Click" />
+
+
+        <!-- Adapted tree view -->
+        <Border BorderBrush="Silver" BorderThickness="1 0 0 0" Grid.Row="1" Grid.Column="1">
+            <TreeView Name="adaptedTreeView" SelectionMode="None"
+                      ItemInvoked="adaptedTreeView_ItemInvoked"/>
+        </Border>
+
+        <!-- Panel for manipulation with nodes -->
+        <Border BorderBrush="Silver" BorderThickness="1 0 0 0" Grid.Row="2" Grid.Column="1" Margin="0 0 0 20">
+            <StackPanel HorizontalAlignment="Center" Margin="0 8 0 20">
+                <Border BorderBrush="LightBlue" BorderThickness="1" CornerRadius="3" >
+                    <StackPanel  Orientation="Vertical" Margin="15">
+                        <TextBlock Text="Select the issue type which you would like to delete or extend with issue subtype and then choose the butoon: "
+                       TextWrapping="Wrap" Margin="0 0 0 15" />
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
+                            <TextBlock Text="Selected issue type: " Margin="0 0 5 0"/>
+                            <TextBlock Text="{Binding InvokedNodeLabel}" FontStyle="Italic" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <!-- Add child button -->
+                            <Button Content="Add new issue type" Margin="0 0 10 0" >
+                                <Button.Flyout>
+                                    <Flyout x:Name="AddChildFlyout" Placement="Top">
+                                        <StackPanel Orientation="Vertical" Width="340">
+                                            <StackPanel Orientation="Horizontal" Margin="5">
+                                                <TextBlock Text="Root issue type:" />
+                                                <TextBlock Text="{Binding InvokedNodeLabel}" FontStyle="Italic" Margin="4 0 0 0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="5">
+                                                <TextBlock Text="Name of new issue type:" />
+                                                <TextBox Name="NewIssueTextBox" Width="162" Margin="4 0 0 0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="5">
+                                                <Button Name="AddChildButton" Content="Create" Click="AddChildButton_Click"/>
+                                                <Button Name="CancelAddChildButton" Content="Cancel" Margin="4 0 0 0"
+                                                        Click="CancelAddChildButton_Click"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
+                            <!-- Delete child button-->
+                            <Button Content="Delete issue type">
+                                <Button.Flyout>
+                                    <Flyout x:Name="DeleteChildFlyout" Placement="Top">
+                                        <StackPanel Orientation="Vertical" Width="320">
+                                            <StackPanel Orientation="Vertical" Margin="5">
+                                                <TextBlock Text="Are you sure you want to delete issue type:" TextWrapping="Wrap" />
+                                                <TextBlock Text="{Binding InvokedNodeLabel}" FontStyle="Italic"  TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="5">
+                                                <Button Name="DeleteChildButton" Content="Delete" Click="DeleteChildButton_Click"/>
+                                                <Button Name="CancelDeleteChildButton" Content="Cancel" Margin="4 0 0 0"
+                                                        Click="CancelDeleteChildButton_Click"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Page>
