@@ -1,0 +1,84 @@
+ANNO_TYPOLOGY
+ID: design
+Name: Design
+ParentID: ROOT
+Color: PURPLE
+ID: ommission
+Name: Ommission
+ParentID: accuracy
+Color: RED
+ID: accuracy
+Name: Accuracy
+ParentID: ROOT
+Color: RED
+ID: local-formatting
+Name: Local formatting
+ParentID: design
+Color: PURPLE
+ID: font
+Name: Font
+ParentID: local-formatting
+Color: PURPLE
+ID: bold/italic
+Name: Bold/italic
+ParentID: font
+Color: PURPLE
+ID: wrong-size
+Name: Wrong size
+ParentID: font
+Color: PURPLE
+SENTENCES
+SRC: Alaskan Malamutes werden immer noch als Schlittenhunde für persönliche Reisen, Transport von Gütern oder zum Bewegen von leichten Gegenständen verwendet; einige werden jedoch für das Freizeitvergnügen von Rodeln, auch bekannt als Mushing, sowie für Skijöring, Bikejöring, Kartfahren und Canicross verwendet.
+REF: Alaskan Malamutes are still in use as sled dogs for personal travel, hauling freight, or helping move light objects; some, however, are used for the recreational pursuit of sledding, also known as mushing, as well as for skijoring, bikejoring, carting, and canicross.
+SYS: Alaskan Malamutes are still in use as sled dogs for personal travel, hauling freight, or helping move light objects; some, however, are used for the recreational pursuit of sledding, also known as mushing, as well as for skijoring, bikejoring, carting, and canicross.
+SYSANNO: #8#18#bold/italic# #52#68#accuracy# 
+SYSMODIFY: Alaskan Malamutes are still in use as sled dogs for personal travel, hauling freight, or helping move light objects; some, however, are used for the recreational pursuit of sledding, also known as mushing, as well as for skijoring, bikejoring, carting, and canicross.
+SYSEDITTIME: 0
+SRC: Jedoch werden die meisten Malamutes heute als Familienhunde oder als Show- oder Leistungshunde beim Gewichtziehen, der Agilität des Hundes oder beim Packen gehalten.
+REF: However, most Malamutes today are kept  - as "family pets or as show or performance dogs in weight pulling, dog agility, or packing.
+SYS: However, most Malamutes today are kept  - as "family pets or as show or performance dogs in weight pulling, dog agility, or packing.
+SYSANNO: #53#68#ommission# #84#89#local-formatting# #9#23#design# 
+SYSMODIFY: However, most Malamutes today are kept  - as "family pets or as show or performance dogs in weight pulling, dog agility, or packing.
+SYSEDITTIME: 0
+SRC: Malamute sind im Langstrecken-Hundeschlittenrennen in der Regel langsamer und schneller gegen kleinere und schnellere Rassen, so dass ihre Arbeitsnutzbarkeit auf das Transportieren oder Reisen über lange Strecken mit einer weit geringeren Geschwindigkeit als für das Rennen beschränkt ist.
+REF: Malamutes are generally slower in long-distance dog sled racing against smaller and faster breeds, so their working usefulness is limited to freighting or traveling over long distances at a far slower rate than that required for racing.
+SYS: Malamutes are generally slower in long-distance dog sled racing against smaller and faster breeds, so their working usefulness is limited to freighting or traveling over long distances at a far slower rate than that required for racing.
+SYSANNO: #64#79#local-formatting# #34#47#local-formatting# #14#23#accuracy# 
+SYSMODIFY: Malamutes are generally slower in long-distance dog sled racing against smaller and faster breeds, so their working usefulness is limited to freighting or traveling over long distances at a far slower rate than that required for racing.
+SYSEDITTIME: 0
+SRC: Sie können auch schwere Objekte über kürzere Entfernungen bewegen. Ein ausgewachsener männlicher Alaskan Malamute kann je nach Aufbau und Training rund 500 1.500 Kilogramm Gewicht ziehen.
+REF: They can also help move heavy objects over shorter distances. An adult male Alaskan Malamute can pull around 500 1,500 kilograms (1,100 3,300 lb) of weight, depending on build and training.
+SYS: They can also help move heavy objects over shorter distances. An adult male Alaskan Malamute can pull around 500 1,500 kilograms (1,100 3,300 lb) of weight, depending on build and training.
+SYSANNO: #62#70#font# #84#92#wrong-size# #97#101#wrong-size# #29#42#wrong-size# #129#141#ommission# #176#180#design# 
+SYSMODIFY: They can also help move heavy objects over shorter distances. An adult male Alaskan Malamute can pull around 500 1,500 kilograms (1,100 3,300 lb) of weight, depending on build and training.
+SYSEDITTIME: 0
+SRC: Der Malamute hat eine lange genetische Grundlage, um in rauen Umgebungen zu leben, und viele seiner Verhaltensweisen haben sich angepasst, um in solchen Umgebungen zu überleben.
+REF: The Malamute has a long genetic foundation of living in harsh environments, and many of its behaviors have adapted to survive in such environments.
+SYS: The Malamute has a long genetic foundation of living in harsh environments, and many of its behaviors have adapted to survive in such environments.
+SYSANNO: #23#32#local-formatting# 
+SYSMODIFY: The Malamute has a long genetic foundation of living in harsh environments, and many of its behaviors have adapted to survive in such environments.
+SYSEDITTIME: 0
+SRC: Unabhängigkeit, Einfallsreichtum, hohe Intelligenz und natürliches Verhalten sind in der Rasse üblich.
+REF: Independence, resourcefulness, high intelligence and natural behaviors are common in the breed.
+SYS: Independence, resourcefulness, high intelligence and natural behaviors are common in the breed.
+SYSANNO: 
+SYSMODIFY: Independence, resourcefulness, high intelligence and natural behaviors are common in the breed.
+SYSEDITTIME: 0
+SRC: Malamuten, wie auch andere Nördliche und Schlittenhundrassen, können aufgrund ihrer Herkunft und Zucht einen hohen Beutetrieb haben.
+REF: Malamutes, like other Northern and sled dog breeds, can have a high prey drive, due to their origins and breeding.
+SYS: Malamutes, like other Northern and sled dog breeds, can have a high prey drive, due to their origins and breeding.
+SYSANNO: 
+SYSMODIFY: Malamutes, like other Northern and sled dog breeds, can have a high prey drive, due to their origins and breeding.
+SYSEDITTIME: 0
+SRC: Dies kann in einigen Fällen bedeuten, dass sie kleinere Tiere, einschließlich anderer Eckzähne, sowie Kaninchen, Eichhörnchen und Katzen jagen; es war jedoch schwierig, im Detail über einzelne Beobachtungsdaten hinaus zu dokumentieren, und viele Besitzer von Malamute haben unterschiedliche Grade an Beuteantrieb zwischen einzelnen Hunden beobachtet.
+REF: This may mean in some cases they will chase smaller animals, including other canines, as well as rabbits, squirrels, and cats; however, this has been difficult to document in detail beyond anecdotal, observational data and many Malamute owners have observed varying levels of prey drive between individual dogs.
+SYS: This may mean in some cases they will chase smaller animals, including other canines, as well as rabbits, squirrels, and cats; however, this has been difficult to document in detail beyond anecdotal, observational data and many Malamute owners have observed varying levels of prey drive between individual dogs.
+SYSANNO: 
+SYSMODIFY: This may mean in some cases they will chase smaller animals, including other canines, as well as rabbits, squirrels, and cats; however, this has been difficult to document in detail beyond anecdotal, observational data and many Malamute owners have observed varying levels of prey drive between individual dogs.
+SYSEDITTIME: 0
+SRC: Während Malamutes in der Regel besonders freundlich um Menschen herum sind und man ihnen beibringen kann, kleinere Haustiere zu tolerieren, ist es notwendig, bei kleineren Tieren und kleinen Kindern auf sie Rücksicht zu nehmen.
+REF: While Malamutes are, as a general rule, particularly amicable around people and can be taught to tolerate smaller pets, it is necessary to be mindful of them around smaller animals and small children.
+SYS: While Malamutes are, as a general rule, particularly amicable around people and can be taught to tolerate smaller pets, it is necessary to be mindful of them around smaller animals and small children.
+SYSANNO: 
+SYSMODIFY: While Malamutes are, as a general rule, particularly amicable around people and can be taught to tolerate smaller pets, it is necessary to be mindful of them around smaller animals and small children.
+SYSEDITTIME: 0
