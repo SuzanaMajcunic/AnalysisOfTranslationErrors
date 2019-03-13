@@ -26,4 +26,6 @@ The application is implemented in a C# language by using Universal Windows Platf
 Charts are implemented by WinRT XAML Toolkit, which support charting controls for UWP (winrtxamltoolkit.controls.datavisualization.uwp).
 A very helpful concept used in this development is LINQ (Language Integrated Query), a Microsoft .NET Framework component that adds query capabilities to C# and another .NET languages.
 
+The project was built by Model–view–viewmodel (MVVM) software architectural pattern. MVVM is an architecture that focuses on the separation of development of user interface from development of the business logic.
+
 This is the first version of TREAT and the development of additional features is in the plan.
